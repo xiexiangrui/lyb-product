@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  * @create: 2018-04-09 18:15
  **/
 @SpringBootApplication
-@EnableAutoConfiguration()
+@EnableAutoConfiguration
 @EnableResourceServer
 public class AuthApplication {
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package com.lyb.product.common.util;
+package com.lyb.product.user.util;
 
 import com.github.pagehelper.Page;
 

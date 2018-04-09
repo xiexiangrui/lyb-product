@@ -1,10 +1,10 @@
 package com.lyb.product.user.controller;
 
 import com.github.pagehelper.Page;
-import com.lyb.product.common.util.AjaxResponse;
-import com.lyb.product.common.util.PageInfo;
 import com.lyb.product.user.entity.Account;
 import com.lyb.product.user.service.AccountService;
+import com.lyb.product.user.util.AjaxResponse;
+import com.lyb.product.user.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,7 @@ public class AccountController {
      * @param pageSize
      * @return
      */
-    @PostMapping("/pageList")
+    @PostMapping("/L")
     public AjaxResponse pageList(@RequestParam(value = "pageNo") Integer pageNo, @RequestParam(value = "pageSize") Integer pageSize){
         if(null == pageNo || null == pageSize){
             return AjaxResponse.returnError(null,"Page params is null");

@@ -1,4 +1,4 @@
-package com.lyb.product.common.util;
+package com.lyb.product.user.util;
 
 /**
  * @program: lyb-product
@@ -69,14 +69,14 @@ public class AjaxResponse {
         this.data = data;
     }
 
-    public static AjaxResponse returnSuccess(Object data,String message){
+    public static AjaxResponse returnSuccess(Object data, String message){
         AjaxResponse obj = new AjaxResponse();
         obj.setData(data);
         obj.setMessage(message);
         return obj;
     }
 
-    public static AjaxResponse returnError(Object data,String message){
+    public static AjaxResponse returnError(Object data, String message){
         AjaxResponse obj = new AjaxResponse();
         obj.setData(data);
         obj.setMessage(message);

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyb.product.user.mapper.ModuleMapper">
+  <resultMap id="BaseResultMap" type="com.lyb.product.user.entity.Module">
+    <id column="mod_id" jdbcType="INTEGER" property="modId" />
+    <result column="mod_code" jdbcType="CHAR" property="modCode" />
+    <result column="mod_name" jdbcType="VARCHAR" property="modName" />
+    <result column="parent_code" jdbcType="CHAR" property="parentCode" />
+    <result column="mod_url" jdbcType="VARCHAR" property="modUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mod_id, mod_code, mod_name, parent_code, mod_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_module
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_module
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lyb.product.user.entity.Module">
+    insert into t_module (mod_id, mod_code, mod_name, 
+      parent_code, mod_url)
+    values (#{modId,jdbcType=INTEGER}, #{modCode,jdbcType=CHAR}, #{modName,jdbcType=VARCHAR}, 
+      #{parentCode,jdbcType=CHAR}, #{modUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyb.product.user.entity.Module">
+    insert into t_module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modId != null">
+        mod_id,
+      </if>
+      <if test="modCode != null">
+        mod_code,
+      </if>
+      <if test="modName != null">
+        mod_name,
+      </if>
+      <if test="parentCode != null">
+        parent_code,
+      </if>
+      <if test="modUrl != null">
+        mod_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modId != null">
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="modCode != null">
+        #{modCode,jdbcType=CHAR},
+      </if>
+      <if test="modName != null">
+        #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=CHAR},
+      </if>
+      <if test="modUrl != null">
+        #{modUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.Module">
+    update t_module
+    <set>
+      <if test="modCode != null">
+        mod_code = #{modCode,jdbcType=CHAR},
+      </if>
+      <if test="modName != null">
+        mod_name = #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        parent_code = #{parentCode,jdbcType=CHAR},
+      </if>
+      <if test="modUrl != null">
+        mod_url = #{modUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.Module">
+    update t_module
+    set mod_code = #{modCode,jdbcType=CHAR},
+      mod_name = #{modName,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=CHAR},
+      mod_url = #{modUrl,jdbcType=VARCHAR}
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </update>
+</mapper>

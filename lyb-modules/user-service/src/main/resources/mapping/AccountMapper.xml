@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyb.product.user.mapper.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.lyb.product.user.entity.Account">
+    <id column="acc_id" jdbcType="INTEGER" property="accId" />
+    <result column="acc_code" jdbcType="CHAR" property="accCode" />
+    <result column="acc_name" jdbcType="VARCHAR" property="accName" />
+    <result column="acc_password" jdbcType="VARCHAR" property="accPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    acc_id, acc_code, acc_name, acc_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_account
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </select>
+
+  <select id="findByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_account ORDER BY acc_id DESC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_account
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lyb.product.user.entity.Account">
+    insert into t_account (acc_code, acc_name,
+      acc_password)
+    values (#{accCode,jdbcType=CHAR}, #{accName,jdbcType=VARCHAR},
+      #{accPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyb.product.user.entity.Account">
+    insert into t_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accCode != null">
+        acc_code,
+      </if>
+      <if test="accName != null">
+        acc_name,
+      </if>
+      <if test="accPassword != null">
+        acc_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accCode != null">
+        #{accCode,jdbcType=CHAR},
+      </if>
+      <if test="accName != null">
+        #{accName,jdbcType=VARCHAR},
+      </if>
+      <if test="accPassword != null">
+        #{accPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.Account">
+    update t_account
+    <set>
+      <if test="accCode != null">
+        acc_code = #{accCode,jdbcType=CHAR},
+      </if>
+      <if test="accName != null">
+        acc_name = #{accName,jdbcType=VARCHAR},
+      </if>
+      <if test="accPassword != null">
+        acc_password = #{accPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.Account">
+    update t_account
+    set acc_code = #{accCode,jdbcType=CHAR},
+      acc_name = #{accName,jdbcType=VARCHAR},
+      acc_password = #{accPassword,jdbcType=VARCHAR}
+    where acc_id = #{accId,jdbcType=INTEGER}
+  </update>
+</mapper>

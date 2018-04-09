@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-modules" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lyb-modules/user-service" charset="UTF-8" />
+  </component>
+</project>

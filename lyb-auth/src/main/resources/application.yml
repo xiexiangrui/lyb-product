@@ -4,3 +4,10 @@ security:
       filter-order: 3
 server:
   port: 9200
+spring:
+  application:
+    name: lyb-auth
+eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/

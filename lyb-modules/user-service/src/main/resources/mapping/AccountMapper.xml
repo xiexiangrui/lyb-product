@@ -7,9 +7,11 @@
     <result column="acc_name" jdbcType="VARCHAR" property="accName" />
     <result column="acc_password" jdbcType="VARCHAR" property="accPassword" />
   </resultMap>
+
   <sql id="Base_Column_List">
     acc_id, acc_code, acc_name, acc_password
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -17,21 +19,31 @@
     where acc_id = #{accId,jdbcType=INTEGER}
   </select>
 
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_account
+    where acc_name = #{accName,jdbcType=VARCHAR}
+  </select>
+
   <select id="findByPage" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_account ORDER BY acc_id DESC
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_account
     where acc_id = #{accId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.lyb.product.user.entity.Account">
     insert into t_account (acc_code, acc_name,
       acc_password)
     values (#{accCode,jdbcType=CHAR}, #{accName,jdbcType=VARCHAR},
       #{accPassword,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.lyb.product.user.entity.Account">
     insert into t_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -57,6 +69,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.Account">
     update t_account
     <set>
@@ -72,6 +85,7 @@
     </set>
     where acc_id = #{accId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.Account">
     update t_account
     set acc_code = #{accCode,jdbcType=CHAR},

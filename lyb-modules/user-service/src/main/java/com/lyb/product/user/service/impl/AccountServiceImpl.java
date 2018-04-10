@@ -44,4 +44,9 @@ public class AccountServiceImpl implements AccountService {
         PageHelper.startPage(pageNo,pageSize);
         return accountMapper.findByPage();
     }
+
+    @Override
+    public Account findByName(String accName) {
+        return accountMapper.findByName(accName);
+    }
 }

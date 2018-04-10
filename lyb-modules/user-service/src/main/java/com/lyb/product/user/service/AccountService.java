@@ -19,4 +19,6 @@ public interface AccountService {
     Account selectById(Integer accId);
 
     Page<Account> findByPage(int pageNo, int pageSize);
+
+    Account findByName(String accName);
 }

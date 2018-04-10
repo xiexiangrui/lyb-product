@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -28,7 +29,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Value("${access_token.validity_period:3600}")
     int accessTokenValiditySeconds = 3600;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
+    //认证管理器
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -39,9 +43,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-                .authenticationManager(this.authenticationManager)
-                .accessTokenConverter(accessTokenConverter());
+        endpoints.authenticationManager(this.authenticationManager)
+                .accessTokenConverter(accessTokenConverter())
+                .userDetailsService(userDetailsService);
     }
 
     @Override
@@ -53,20 +57,19 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("normal-app")
-                .authorizedGrantTypes("authorization_code", "implicit")
-                .authorities("ROLE_CLIENT")
-                .scopes("read", "write")
-                .resourceIds(resourceId)
-                .accessTokenValiditySeconds(accessTokenValiditySeconds)
-                .and()
-                .withClient("trusted-app")
-                .authorizedGrantTypes("client_credentials", "password")
+                // 用来标识客户的Id(必须)
+                .withClient("lyb-product")
+                //此客户端可以使用的授权类型
+                .authorizedGrantTypes("password")
+                //此客户端可以使用的权限（基于Spring Security authorities）。
                 .authorities("ROLE_TRUSTED_CLIENT")
+                //用来限制客户端的访问范围，如果为空（默认）的话，那么客户端拥有全部的访问范围。
                 .scopes("read", "write")
-                .resourceIds(resourceId)
-                .accessTokenValiditySeconds(accessTokenValiditySeconds)
-                .secret("secret");
+                //.resourceIds(resourceId)
+                // 访问令牌有效时间
+                .accessTokenValiditySeconds(accessTokenValiditySeconds);
+                // 客户端安全码(可选)
+                //.secret("secret");
     }
 
 }

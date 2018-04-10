@@ -13,6 +13,7 @@
         <module>lyb-auth</module>
         <module>lyb-modules</module>
         <module>lyb-gateway</module>
+        <module>lyb-common</module>
     </modules>
 
     <parent>

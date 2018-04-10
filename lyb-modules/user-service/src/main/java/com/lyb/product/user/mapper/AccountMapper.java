@@ -2,6 +2,7 @@ package com.lyb.product.user.mapper;
 
 import com.github.pagehelper.Page;
 import com.lyb.product.user.entity.Account;
+import org.apache.ibatis.annotations.Param;
 
 public interface AccountMapper {
     int deleteByPrimaryKey(Integer accId);
@@ -17,4 +18,6 @@ public interface AccountMapper {
     int updateByPrimaryKey(Account record);
 
     Page<Account> findByPage();
+
+    Account findByName(String accName);
 }

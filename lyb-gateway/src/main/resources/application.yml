@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: lyb-gateway
+server:
+  port: 8888

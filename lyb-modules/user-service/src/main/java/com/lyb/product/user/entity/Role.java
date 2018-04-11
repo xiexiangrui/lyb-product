@@ -1,33 +1,63 @@
 package com.lyb.product.user.entity;
 
 public class Role {
-    private Integer roleId;
+    private Integer id;
 
-    private String roleCode;
+    private String name;
 
-    private String roleName;
+    private String roleKey;
 
-    public Integer getRoleId() {
-        return roleId;
+    private String description;
+
+    private Integer status;
+
+    private Integer datacompany;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getRoleCode() {
-        return roleCode;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode == null ? null : roleCode.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRoleKey() {
+        return roleKey;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey == null ? null : roleKey.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getDatacompany() {
+        return datacompany;
+    }
+
+    public void setDatacompany(Integer datacompany) {
+        this.datacompany = datacompany;
     }
 }

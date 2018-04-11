@@ -2,70 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyb.product.user.mapper.ModulePrivilegeMapper">
   <resultMap id="BaseResultMap" type="com.lyb.product.user.entity.ModulePrivilege">
-    <id column="mp_id" jdbcType="INTEGER" property="mpId" />
-    <result column="mod_code" jdbcType="CHAR" property="modCode" />
-    <result column="pri_code" jdbcType="CHAR" property="priCode" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mod_id" jdbcType="INTEGER" property="modId" />
+    <result column="pri_id" jdbcType="INTEGER" property="priId" />
   </resultMap>
   <sql id="Base_Column_List">
-    mp_id, mod_code, pri_code
+    id, mod_id, pri_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_module_privilege
-    where mp_id = #{mpId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_module_privilege
-    where mp_id = #{mpId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lyb.product.user.entity.ModulePrivilege">
-    insert into t_module_privilege (mp_id, mod_code, pri_code
+    insert into t_module_privilege (id, mod_id, pri_id
       )
-    values (#{mpId,jdbcType=INTEGER}, #{modCode,jdbcType=CHAR}, #{priCode,jdbcType=CHAR}
+    values (#{id,jdbcType=INTEGER}, #{modId,jdbcType=INTEGER}, #{priId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lyb.product.user.entity.ModulePrivilege">
     insert into t_module_privilege
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="mpId != null">
-        mp_id,
+      <if test="id != null">
+        id,
       </if>
-      <if test="modCode != null">
-        mod_code,
+      <if test="modId != null">
+        mod_id,
       </if>
-      <if test="priCode != null">
-        pri_code,
+      <if test="priId != null">
+        pri_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="mpId != null">
-        #{mpId,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="modCode != null">
-        #{modCode,jdbcType=CHAR},
+      <if test="modId != null">
+        #{modId,jdbcType=INTEGER},
       </if>
-      <if test="priCode != null">
-        #{priCode,jdbcType=CHAR},
+      <if test="priId != null">
+        #{priId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.ModulePrivilege">
     update t_module_privilege
     <set>
-      <if test="modCode != null">
-        mod_code = #{modCode,jdbcType=CHAR},
+      <if test="modId != null">
+        mod_id = #{modId,jdbcType=INTEGER},
       </if>
-      <if test="priCode != null">
-        pri_code = #{priCode,jdbcType=CHAR},
+      <if test="priId != null">
+        pri_id = #{priId,jdbcType=INTEGER},
       </if>
     </set>
-    where mp_id = #{mpId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.ModulePrivilege">
     update t_module_privilege
-    set mod_code = #{modCode,jdbcType=CHAR},
-      pri_code = #{priCode,jdbcType=CHAR}
-    where mp_id = #{mpId,jdbcType=INTEGER}
+    set mod_id = #{modId,jdbcType=INTEGER},
+      pri_id = #{priId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

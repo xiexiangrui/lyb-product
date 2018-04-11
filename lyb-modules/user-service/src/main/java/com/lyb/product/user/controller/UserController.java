@@ -1,14 +1,12 @@
 package com.lyb.product.user.controller;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.util.StringUtil;
-import com.lyb.product.user.entity.Account;
-import com.lyb.product.user.service.AccountService;
-import com.lyb.product.user.util.AjaxResponse;
+import com.lyb.product.common.util.AjaxResponse;
+import com.lyb.product.user.entity.User;
+import com.lyb.product.user.service.UserService;
 import com.lyb.product.user.util.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -20,70 +18,65 @@ import org.springframework.web.bind.annotation.*;
  * @create: 2018-04-09 17:28
  **/
 @RestController
-@RequestMapping(value = "/account")
-public class AccountController {
+@RequestMapping(value = "/user")
+public class UserController {
 
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
-    @Value("${server.port}")
-    String port;
+
 
     @Autowired
-    private AccountService accountService;
+    private UserService userService;
 
     /**
      * 新增
-     * @param account
+     * @param user
      * @return
      */
     @PostMapping("/add")
-    public AjaxResponse addAccount(@RequestBody Account account){
-        account.setAccPassword(ENCODER.encode(account.getAccPassword()).trim());
-        if(accountService.addAccount(account) < 0){
+    public AjaxResponse addUser(@RequestBody User user){
+        user.setPassword(ENCODER.encode(user.getPassword()).trim());
+        if(userService.addUser(user) < 0){
             return AjaxResponse.returnError(null,"add error");
         }
-        return AjaxResponse.returnSuccess(account,"success");
+        return AjaxResponse.returnSuccess(user,"success");
     }
 
     /**
      * 更新
-     * @param account
+     * @param user
      * @return
      */
     @PostMapping("/update")
-    public AjaxResponse updateAccount(@RequestBody Account account){
-        account.setAccPassword(ENCODER.encode(account.getAccPassword()).trim());
-        if(null == account.getAccId()){
+    public AjaxResponse updateUser(@RequestBody User user){
+        user.setPassword(ENCODER.encode(user.getPassword()).trim());
+        if(null == user.getId()){
             return AjaxResponse.returnError(null,"account id is null");
         }
-        if(accountService.addAccount(account) < 0){
+        if(userService.updateUser(user) < 0){
             return AjaxResponse.returnError(null,"update error");
         }
-        return AjaxResponse.returnSuccess(account,"success");
+        return AjaxResponse.returnSuccess(user,"success");
     }
 
 
     /**
      * 根据用户名查询
-     * @param accName
+     * @param loginName
      * @return
      */
-    @GetMapping("/findByName/{accName}")
-    public Account findByName(@PathVariable("accName") String accName){
+    @GetMapping("/findByName/{loginName}")
+    public AjaxResponse findByName(@PathVariable("loginName") String loginName){
 
-        /*if(StringUtils.isBlank(accName)){
+        if(StringUtils.isBlank(loginName)){
             return AjaxResponse.returnError(null,"account Name is null");
         }
-        Account account = accountService.findByName(accName);
-        if(null == account){
+        User user = userService.findByLoginName(loginName);
+        if(null == user){
             return AjaxResponse.returnError(null,"no data");
         }
-
-        return AjaxResponse.returnSuccess(account,"success");*/
-
-        Account account = accountService.findByName(accName);
-
-
-        return account;
+        return AjaxResponse.returnSuccess(user,"success");
+        /*User user = userService.findByLoginName(loginName);
+        return user;*/
     }
 
     /**
@@ -97,10 +90,10 @@ public class AccountController {
         if(null == pageNo || null == pageSize){
             return AjaxResponse.returnError(null,"Page params is null");
         }
-        Page<Account> persons = accountService.findByPage(pageNo, pageSize);
+        Page<User> users = userService.findByPage(pageNo, pageSize);
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
-        PageInfo<Account> pageInfo = new PageInfo<>(persons);
-        return AjaxResponse.returnSuccess(pageInfo,"form server port: "+port+" success");
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        return AjaxResponse.returnSuccess(pageInfo,"success");
     }
 
 

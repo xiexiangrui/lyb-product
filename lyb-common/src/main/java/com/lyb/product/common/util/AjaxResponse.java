@@ -1,4 +1,4 @@
-package com.lyb.product.user.util;
+package com.lyb.product.common.util;
 
 /**
  * @program: lyb-product

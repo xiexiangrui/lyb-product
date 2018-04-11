@@ -2,92 +2,140 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyb.product.user.mapper.ModuleMapper">
   <resultMap id="BaseResultMap" type="com.lyb.product.user.entity.Module">
-    <id column="mod_id" jdbcType="INTEGER" property="modId" />
-    <result column="mod_code" jdbcType="CHAR" property="modCode" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="mod_name" jdbcType="VARCHAR" property="modName" />
-    <result column="parent_code" jdbcType="CHAR" property="parentCode" />
+    <result column="mod_key" jdbcType="VARCHAR" property="modKey" />
+    <result column="mod_icon" jdbcType="VARCHAR" property="modIcon" />
     <result column="mod_url" jdbcType="VARCHAR" property="modUrl" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="datacompany" jdbcType="INTEGER" property="datacompany" />
   </resultMap>
   <sql id="Base_Column_List">
-    mod_id, mod_code, mod_name, parent_code, mod_url
+    id, mod_name, mod_key, mod_icon, mod_url, parent_id, description, status, datacompany
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_module
-    where mod_id = #{modId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_module
-    where mod_id = #{modId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lyb.product.user.entity.Module">
-    insert into t_module (mod_id, mod_code, mod_name, 
-      parent_code, mod_url)
-    values (#{modId,jdbcType=INTEGER}, #{modCode,jdbcType=CHAR}, #{modName,jdbcType=VARCHAR}, 
-      #{parentCode,jdbcType=CHAR}, #{modUrl,jdbcType=VARCHAR})
+    insert into t_module (id, mod_name, mod_key, 
+      mod_icon, mod_url, parent_id, 
+      description, status, datacompany
+      )
+    values (#{id,jdbcType=INTEGER}, #{modName,jdbcType=VARCHAR}, #{modKey,jdbcType=VARCHAR}, 
+      #{modIcon,jdbcType=VARCHAR}, #{modUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{datacompany,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lyb.product.user.entity.Module">
     insert into t_module
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="modId != null">
-        mod_id,
-      </if>
-      <if test="modCode != null">
-        mod_code,
+      <if test="id != null">
+        id,
       </if>
       <if test="modName != null">
         mod_name,
       </if>
-      <if test="parentCode != null">
-        parent_code,
+      <if test="modKey != null">
+        mod_key,
+      </if>
+      <if test="modIcon != null">
+        mod_icon,
       </if>
       <if test="modUrl != null">
         mod_url,
       </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="datacompany != null">
+        datacompany,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="modId != null">
-        #{modId,jdbcType=INTEGER},
-      </if>
-      <if test="modCode != null">
-        #{modCode,jdbcType=CHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="modName != null">
         #{modName,jdbcType=VARCHAR},
       </if>
-      <if test="parentCode != null">
-        #{parentCode,jdbcType=CHAR},
+      <if test="modKey != null">
+        #{modKey,jdbcType=VARCHAR},
+      </if>
+      <if test="modIcon != null">
+        #{modIcon,jdbcType=VARCHAR},
       </if>
       <if test="modUrl != null">
         #{modUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="datacompany != null">
+        #{datacompany,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.Module">
     update t_module
     <set>
-      <if test="modCode != null">
-        mod_code = #{modCode,jdbcType=CHAR},
-      </if>
       <if test="modName != null">
         mod_name = #{modName,jdbcType=VARCHAR},
       </if>
-      <if test="parentCode != null">
-        parent_code = #{parentCode,jdbcType=CHAR},
+      <if test="modKey != null">
+        mod_key = #{modKey,jdbcType=VARCHAR},
+      </if>
+      <if test="modIcon != null">
+        mod_icon = #{modIcon,jdbcType=VARCHAR},
       </if>
       <if test="modUrl != null">
         mod_url = #{modUrl,jdbcType=VARCHAR},
       </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="datacompany != null">
+        datacompany = #{datacompany,jdbcType=INTEGER},
+      </if>
     </set>
-    where mod_id = #{modId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.Module">
     update t_module
-    set mod_code = #{modCode,jdbcType=CHAR},
-      mod_name = #{modName,jdbcType=VARCHAR},
-      parent_code = #{parentCode,jdbcType=CHAR},
-      mod_url = #{modUrl,jdbcType=VARCHAR}
-    where mod_id = #{modId,jdbcType=INTEGER}
+    set mod_name = #{modName,jdbcType=VARCHAR},
+      mod_key = #{modKey,jdbcType=VARCHAR},
+      mod_icon = #{modIcon,jdbcType=VARCHAR},
+      mod_url = #{modUrl,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      datacompany = #{datacompany,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

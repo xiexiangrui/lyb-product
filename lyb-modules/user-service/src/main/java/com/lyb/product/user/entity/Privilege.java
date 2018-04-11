@@ -1,26 +1,30 @@
 package com.lyb.product.user.entity;
 
 public class Privilege {
-    private Integer priId;
+    private Integer id;
 
-    private String priCode;
+    private String priKey;
 
     private String priName;
 
-    public Integer getPriId() {
-        return priId;
+    private String description;
+
+    private Integer datacompany;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setPriId(Integer priId) {
-        this.priId = priId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getPriCode() {
-        return priCode;
+    public String getPriKey() {
+        return priKey;
     }
 
-    public void setPriCode(String priCode) {
-        this.priCode = priCode == null ? null : priCode.trim();
+    public void setPriKey(String priKey) {
+        this.priKey = priKey == null ? null : priKey.trim();
     }
 
     public String getPriName() {
@@ -29,5 +33,21 @@ public class Privilege {
 
     public void setPriName(String priName) {
         this.priName = priName == null ? null : priName.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public Integer getDatacompany() {
+        return datacompany;
+    }
+
+    public void setDatacompany(Integer datacompany) {
+        this.datacompany = datacompany;
     }
 }

@@ -2,70 +2,92 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyb.product.user.mapper.PrivilegeMapper">
   <resultMap id="BaseResultMap" type="com.lyb.product.user.entity.Privilege">
-    <id column="pri_id" jdbcType="INTEGER" property="priId" />
-    <result column="pri_code" jdbcType="CHAR" property="priCode" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pri_key" jdbcType="VARCHAR" property="priKey" />
     <result column="pri_name" jdbcType="VARCHAR" property="priName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="datacompany" jdbcType="INTEGER" property="datacompany" />
   </resultMap>
   <sql id="Base_Column_List">
-    pri_id, pri_code, pri_name
+    id, pri_key, pri_name, description, datacompany
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_privilege
-    where pri_id = #{priId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_privilege
-    where pri_id = #{priId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lyb.product.user.entity.Privilege">
-    insert into t_privilege (pri_id, pri_code, pri_name
-      )
-    values (#{priId,jdbcType=INTEGER}, #{priCode,jdbcType=CHAR}, #{priName,jdbcType=VARCHAR}
-      )
+    insert into t_privilege (id, pri_key, pri_name, 
+      description, datacompany)
+    values (#{id,jdbcType=INTEGER}, #{priKey,jdbcType=VARCHAR}, #{priName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{datacompany,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lyb.product.user.entity.Privilege">
     insert into t_privilege
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="priId != null">
-        pri_id,
+      <if test="id != null">
+        id,
       </if>
-      <if test="priCode != null">
-        pri_code,
+      <if test="priKey != null">
+        pri_key,
       </if>
       <if test="priName != null">
         pri_name,
       </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="datacompany != null">
+        datacompany,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="priId != null">
-        #{priId,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="priCode != null">
-        #{priCode,jdbcType=CHAR},
+      <if test="priKey != null">
+        #{priKey,jdbcType=VARCHAR},
       </if>
       <if test="priName != null">
         #{priName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="datacompany != null">
+        #{datacompany,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lyb.product.user.entity.Privilege">
     update t_privilege
     <set>
-      <if test="priCode != null">
-        pri_code = #{priCode,jdbcType=CHAR},
+      <if test="priKey != null">
+        pri_key = #{priKey,jdbcType=VARCHAR},
       </if>
       <if test="priName != null">
         pri_name = #{priName,jdbcType=VARCHAR},
       </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="datacompany != null">
+        datacompany = #{datacompany,jdbcType=INTEGER},
+      </if>
     </set>
-    where pri_id = #{priId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lyb.product.user.entity.Privilege">
     update t_privilege
-    set pri_code = #{priCode,jdbcType=CHAR},
-      pri_name = #{priName,jdbcType=VARCHAR}
-    where pri_id = #{priId,jdbcType=INTEGER}
+    set pri_key = #{priKey,jdbcType=VARCHAR},
+      pri_name = #{priName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      datacompany = #{datacompany,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

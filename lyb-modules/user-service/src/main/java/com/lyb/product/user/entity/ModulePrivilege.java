@@ -1,33 +1,33 @@
 package com.lyb.product.user.entity;
 
 public class ModulePrivilege {
-    private Integer mpId;
+    private Integer id;
 
-    private String modCode;
+    private Integer modId;
 
-    private String priCode;
+    private Integer priId;
 
-    public Integer getMpId() {
-        return mpId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMpId(Integer mpId) {
-        this.mpId = mpId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getModCode() {
-        return modCode;
+    public Integer getModId() {
+        return modId;
     }
 
-    public void setModCode(String modCode) {
-        this.modCode = modCode == null ? null : modCode.trim();
+    public void setModId(Integer modId) {
+        this.modId = modId;
     }
 
-    public String getPriCode() {
-        return priCode;
+    public Integer getPriId() {
+        return priId;
     }
 
-    public void setPriCode(String priCode) {
-        this.priCode = priCode == null ? null : priCode.trim();
+    public void setPriId(Integer priId) {
+        this.priId = priId;
     }
 }

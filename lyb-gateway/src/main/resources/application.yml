@@ -1,5 +1,40 @@
-server:
-  port: 8888
 spring:
   application:
     name: lyb-gateway
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+      clients: lyb-auth,user-service
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    lyb-auth:
+      path: /auth/**
+      serviceId: lyb-auth
+      stripPrefix: true
+      sensitiveHeaders:
+    lyb-user-service:
+      path: /user/**
+      serviceId: user-service
+      stripPrefix: true
+      sensitiveHeaders:
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:${server.port}/auth/oauth/token
+      #user-authorization-uri: http://localhost:${server.port}/user/oauth/authorize
+      client-id: lyb-product
+    resource:
+      user-info-uri: http://localhost:${server.port}/oauth/check-token
+      prefer-token-info: false

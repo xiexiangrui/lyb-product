@@ -1,6 +1,5 @@
-package com.lyb.product.auth.config;
+package com.lvb.lybgateway.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,30 +16,18 @@ import javax.servlet.http.HttpServletRequest;
  * @program: lyb-product
  * @description:
  * @author: xiexiangrui
- * @create: 2018-04-09 18:22
+ * @create: 2018-04-11 10:48
  **/
-/*@Configuration
+@Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    @Value("${resource.id:spring-boot-application}")
-    private String resourceId;
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        // @formatter:off
-        resources.resourceId(resourceId);
-        // @formatter:on
-    }
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
         http.requestMatcher(new OAuthRequestedMatcher())
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated();
-        // @formatter:on
     }
 
     private static class OAuthRequestedMatcher implements RequestMatcher {
@@ -53,4 +39,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
             return haveOauth2Token || haveAccessToken;
         }
     }
-}*/
+    /**
+     * 加密方式
+     * @return
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+}

@@ -1,10 +1,12 @@
 package com.lyb.product.auth.util;
 
-import com.lyb.product.common.vo.UserVo;
+import com.lyb.product.auth.entity.Role;
+import com.lyb.product.auth.entity.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
+import java.util.*;
 
 /**
  * @program: lyb-product
@@ -12,22 +14,32 @@ import java.util.Collection;
  * @author: xiexiangrui
  * @create: 2018-04-10 17:11
  **/
+
 public class UserDetailsImpl implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
     private String username;
     private String password;
-    private String status;
-    private String userCode;
+    private Integer status;
+    private List<Role> roleList = new ArrayList<Role>();
 
-    public UserDetailsImpl(UserVo userVo) {
-        this.username = userVo.getAccName();
-        this.password = userVo.getAccPassword();
-        this.userCode = userVo.getAccCode();
+    public UserDetailsImpl(User user) {
+        this.username = user.getLoginNmae();
+        this.password = user.getPassword();
+        this.status = user.getStatus();
+        this.roleList = user.getRoles();
     }
-
+    /**
+     * 用户角色列表
+     * @return
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        for (Role role : this.roleList) {
+            authorities.add(new SimpleGrantedAuthority(role.getRoleKey()));
+        }
+        return authorities;
     }
 
     @Override
@@ -58,5 +70,29 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }

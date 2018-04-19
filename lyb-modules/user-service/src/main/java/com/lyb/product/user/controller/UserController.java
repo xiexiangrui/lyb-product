@@ -5,7 +5,6 @@ import com.lyb.product.common.util.AjaxResponse;
 import com.lyb.product.user.entity.User;
 import com.lyb.product.user.service.UserService;
 import com.lyb.product.user.util.PageInfo;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
-
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
-
 
     @Autowired
     private UserService userService;
@@ -65,18 +62,18 @@ public class UserController {
      * @return
      */
     @GetMapping("/findByName/{loginName}")
-    public AjaxResponse findByName(@PathVariable("loginName") String loginName){
+    public User findByName(@PathVariable("loginName") String loginName){
 
-        if(StringUtils.isBlank(loginName)){
-            return AjaxResponse.returnError(null,"account Name is null");
-        }
+//        if(StringUtils.isBlank(loginName)){
+//            return AjaxResponse.returnError(null,"account Name is null");
+//        }
+//        User user = userService.findByLoginName(loginName);
+//        if(null == user){
+//            return AjaxResponse.returnError(null,"no data");
+//        }
+//        return AjaxResponse.returnSuccess(user,"success");
         User user = userService.findByLoginName(loginName);
-        if(null == user){
-            return AjaxResponse.returnError(null,"no data");
-        }
-        return AjaxResponse.returnSuccess(user,"success");
-        /*User user = userService.findByLoginName(loginName);
-        return user;*/
+        return user;
     }
 
     /**
@@ -95,6 +92,4 @@ public class UserController {
         PageInfo<User> pageInfo = new PageInfo<>(users);
         return AjaxResponse.returnSuccess(pageInfo,"success");
     }
-
-
 }

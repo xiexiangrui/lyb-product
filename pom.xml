@@ -33,10 +33,10 @@
     <!--公共依赖-->
     <dependencies>
         <!--注册中心-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
+        </dependency>-->
         <!--配置中心-->
         <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
